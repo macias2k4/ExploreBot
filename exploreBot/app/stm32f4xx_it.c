@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
+#n
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
@@ -55,6 +55,7 @@
 
 /* USER CODE END 0 */
 
+
 /* External variables --------------------------------------------------------*/
 
 /* USER CODE BEGIN EV */
@@ -65,130 +66,108 @@
 /*           Cortex-M4 Processor Interruption and Exception Handlers          */ 
 /******************************************************************************/
 /**
-  * @brief This function handles Non maskable interrupt.
-  */
+#t* @brief This function handles Non maskable interrupt.
+#t*/
 void NMI_Handler(void)
 {
-  /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
-
-  /* USER CODE END NonMaskableInt_IRQn 0 */
-  /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
-
-  /* USER CODE END NonMaskableInt_IRQn 1 */
-}
-
+#t/* USER CODE BEGIN NonMaskableInt_IRQn 0 */
+#n#t/* USER CODE END NonMaskableInt_IRQn 0 */
+#t/* USER CODE BEGIN NonMaskableInt_IRQn 1 */
+#n#t/* USER CODE END NonMaskableInt_IRQn 1 */
+}#n
 /**
-  * @brief This function handles Hard fault interrupt.
-  */
+#t* @brief This function handles Hard fault interrupt.
+#t*/
 void HardFault_Handler(void)
 {
-  /* USER CODE BEGIN HardFault_IRQn 0 */
-
-  /* USER CODE END HardFault_IRQn 0 */
-  while (1)
-  {
-    /* USER CODE BEGIN W1_HardFault_IRQn 0 */
-    /* USER CODE END W1_HardFault_IRQn 0 */
-  }
-}
-
+#t/* USER CODE BEGIN HardFault_IRQn 0 */
+#n#t/* USER CODE END HardFault_IRQn 0 */
+#twhile (1)
+#t{
+#t#t/* USER CODE BEGIN W1_HardFault_IRQn 0 */
+#t#t/* USER CODE END W1_HardFault_IRQn 0 */
+#t}
+}#n
 /**
-  * @brief This function handles Memory management fault.
-  */
+#t* @brief This function handles Memory management fault.
+#t*/
 void MemManage_Handler(void)
 {
-  /* USER CODE BEGIN MemoryManagement_IRQn 0 */
-
-  /* USER CODE END MemoryManagement_IRQn 0 */
-  while (1)
-  {
-    /* USER CODE BEGIN W1_MemoryManagement_IRQn 0 */
-    /* USER CODE END W1_MemoryManagement_IRQn 0 */
-  }
-}
-
+#t/* USER CODE BEGIN MemoryManagement_IRQn 0 */
+#n#t/* USER CODE END MemoryManagement_IRQn 0 */
+#twhile (1)
+#t{
+#t#t/* USER CODE BEGIN W1_MemoryManagement_IRQn 0 */
+#t#t/* USER CODE END W1_MemoryManagement_IRQn 0 */
+#t}
+}#n
 /**
-  * @brief This function handles Pre-fetch fault, memory access fault.
-  */
+#t* @brief This function handles Pre-fetch fault, memory access fault.
+#t*/
 void BusFault_Handler(void)
 {
-  /* USER CODE BEGIN BusFault_IRQn 0 */
-
-  /* USER CODE END BusFault_IRQn 0 */
-  while (1)
-  {
-    /* USER CODE BEGIN W1_BusFault_IRQn 0 */
-    /* USER CODE END W1_BusFault_IRQn 0 */
-  }
-}
-
+#t/* USER CODE BEGIN BusFault_IRQn 0 */
+#n#t/* USER CODE END BusFault_IRQn 0 */
+#twhile (1)
+#t{
+#t#t/* USER CODE BEGIN W1_BusFault_IRQn 0 */
+#t#t/* USER CODE END W1_BusFault_IRQn 0 */
+#t}
+}#n
 /**
-  * @brief This function handles Undefined instruction or illegal state.
-  */
+#t* @brief This function handles Undefined instruction or illegal state.
+#t*/
 void UsageFault_Handler(void)
 {
-  /* USER CODE BEGIN UsageFault_IRQn 0 */
-
-  /* USER CODE END UsageFault_IRQn 0 */
-  while (1)
-  {
-    /* USER CODE BEGIN W1_UsageFault_IRQn 0 */
-    /* USER CODE END W1_UsageFault_IRQn 0 */
-  }
-}
-
+#t/* USER CODE BEGIN UsageFault_IRQn 0 */
+#n#t/* USER CODE END UsageFault_IRQn 0 */
+#twhile (1)
+#t{
+#t#t/* USER CODE BEGIN W1_UsageFault_IRQn 0 */
+#t#t/* USER CODE END W1_UsageFault_IRQn 0 */
+#t}
+}#n
 /**
-  * @brief This function handles System service call via SWI instruction.
-  */
+#t* @brief This function handles System service call via SWI instruction.
+#t*/
 void SVC_Handler(void)
 {
-  /* USER CODE BEGIN SVCall_IRQn 0 */
-
-  /* USER CODE END SVCall_IRQn 0 */
-  /* USER CODE BEGIN SVCall_IRQn 1 */
-
-  /* USER CODE END SVCall_IRQn 1 */
-}
-
+#t/* USER CODE BEGIN SVCall_IRQn 0 */
+#n#t/* USER CODE END SVCall_IRQn 0 */
+#t/* USER CODE BEGIN SVCall_IRQn 1 */
+#n#t/* USER CODE END SVCall_IRQn 1 */
+}#n
 /**
-  * @brief This function handles Debug monitor.
-  */
+#t* @brief This function handles Debug monitor.
+#t*/
 void DebugMon_Handler(void)
 {
-  /* USER CODE BEGIN DebugMonitor_IRQn 0 */
-
-  /* USER CODE END DebugMonitor_IRQn 0 */
-  /* USER CODE BEGIN DebugMonitor_IRQn 1 */
-
-  /* USER CODE END DebugMonitor_IRQn 1 */
-}
-
+#t/* USER CODE BEGIN DebugMonitor_IRQn 0 */
+#n#t/* USER CODE END DebugMonitor_IRQn 0 */
+#t/* USER CODE BEGIN DebugMonitor_IRQn 1 */
+#n#t/* USER CODE END DebugMonitor_IRQn 1 */
+}#n
 /**
-  * @brief This function handles Pendable request for system service.
-  */
+#t* @brief This function handles Pendable request for system service.
+#t*/
 void PendSV_Handler(void)
 {
-  /* USER CODE BEGIN PendSV_IRQn 0 */
-
-  /* USER CODE END PendSV_IRQn 0 */
-  /* USER CODE BEGIN PendSV_IRQn 1 */
-
-  /* USER CODE END PendSV_IRQn 1 */
-}
-
+#t/* USER CODE BEGIN PendSV_IRQn 0 */
+#n#t/* USER CODE END PendSV_IRQn 0 */
+#t/* USER CODE BEGIN PendSV_IRQn 1 */
+#n#t/* USER CODE END PendSV_IRQn 1 */
+}#n
 /**
-  * @brief This function handles System tick timer.
-  */
+#t* @brief This function handles System tick timer.
+#t*/
 void SysTick_Handler(void)
 {
-  /* USER CODE BEGIN SysTick_IRQn 0 */
-
-  /* USER CODE END SysTick_IRQn 0 */
-  HAL_IncTick();
-  /* USER CODE BEGIN SysTick_IRQn 1 */
-
-  /* USER CODE END SysTick_IRQn 1 */
-}
+#t/* USER CODE BEGIN SysTick_IRQn 0 */
+#n#t/* USER CODE END SysTick_IRQn 0 */
+#tHAL_IncTick();
+#t/* USER CODE BEGIN SysTick_IRQn 1 */
+#n#t/* USER CODE END SysTick_IRQn 1 */
+}#n
 
 /******************************************************************************/
 /* STM32F4xx Peripheral Interrupt Handlers                                    */
@@ -196,6 +175,7 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32f4xx.s).                    */
 /******************************************************************************/
+
 
 /* USER CODE BEGIN 1 */
 

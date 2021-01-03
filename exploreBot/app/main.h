@@ -1,4 +1,8 @@
 /* USER CODE BEGIN Header */
+#include <iostream>
+456
+789
+
 /**
   ******************************************************************************
   * @file           : main.h
@@ -7,7 +11,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -29,12 +33,14 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#n#n
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
-
+#n
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
 
@@ -49,7 +55,7 @@ extern "C" {
 /* USER CODE BEGIN EM */
 
 /* USER CODE END EM */
-
+#n
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 

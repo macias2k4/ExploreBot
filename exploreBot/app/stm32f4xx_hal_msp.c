@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -24,6 +24,8 @@
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
+#n
+
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
@@ -59,93 +61,91 @@
 
 /* USER CODE END 0 */
 /**
-  * Initializes the Global MSP.
-  */
+#t* Initializes the Global MSP.
+#t*/
 void HAL_MspInit(void)
 {
-  /* USER CODE BEGIN MspInit 0 */
+#t/* USER CODE BEGIN MspInit 0 */
 
-  /* USER CODE END MspInit 0 */
-
-  __HAL_RCC_SYSCFG_CLK_ENABLE();
-  __HAL_RCC_PWR_CLK_ENABLE();
-
-  HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_0);
-
-  /* System interrupt init*/
-
-  /* USER CODE BEGIN MspInit 1 */
-
-  /* USER CODE END MspInit 1 */
+#n#t/* USER CODE END MspInit 0 */
+#n
+#n
+#t__HAL_RCC_SYSCFG_CLK_ENABLE();
+#t__HAL_RCC_PWR_CLK_ENABLE();
+#n
+#tHAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_0);#n
+#t/* System interrupt init*/
+#n
+#n
+#n
+#n
+#t/* USER CODE BEGIN MspInit 1 */#n
+#t/* USER CODE END MspInit 1 */
 }
+
+
+
+
 
 /**
 * @brief UART MSP Initialization
 * This function configures the hardware resources used in this example
 * @param huart: UART handle pointer
 * @retval None
-*/
-void HAL_UART_MspInit(UART_HandleTypeDef* huart)
+*/#nvoid HAL_UART_MspInit(UART_HandleTypeDef* huart)
 {
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if(huart->Instance==USART2)
-  {
-  /* USER CODE BEGIN USART2_MspInit 0 */
-
-  /* USER CODE END USART2_MspInit 0 */
-    /* Peripheral clock enable */
-    __HAL_RCC_USART2_CLK_ENABLE();
-  
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    /**USART2 GPIO Configuration    
-    PA2     ------> USART2_TX
-    PA3     ------> USART2_RX 
-    */
-    GPIO_InitStruct.Pin = USART_TX_Pin|USART_RX_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /* USER CODE BEGIN USART2_MspInit 1 */
-
-  /* USER CODE END USART2_MspInit 1 */
-  }
-
-}
-
+#tGPIO_InitTypeDef GPIO_InitStruct = {0};
+#tif(huart->Instance==USART2)
+#t{
+#t/* USER CODE BEGIN USART2_MspInit 0 */
+#n#t/* USER CODE END USART2_MspInit 0 */
+#t#t/* Peripheral clock enable */
+#t#t__HAL_RCC_USART2_CLK_ENABLE();
+#t
+#t#t__HAL_RCC_GPIOA_CLK_ENABLE();
+#t#t/**USART2 GPIO Configuration#t#t
+#t#tPA2#t#t ------> USART2_TX
+#t#tPA3#t#t ------> USART2_RX #n#t#t*/
+#t#tGPIO_InitStruct.Pin = USART_TX_Pin|USART_RX_Pin;
+#t#tGPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+#t#tGPIO_InitStruct.Pull = GPIO_NOPULL;
+#t#tGPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+#t#tGPIO_InitStruct.Alternate = GPIO_AF7_USART2;
+#t#tHAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+#n
+#t/* USER CODE BEGIN USART2_MspInit 1 */
+#n#t/* USER CODE END USART2_MspInit 1 */
+#t}
+#n}#n
 /**
 * @brief UART MSP De-Initialization
 * This function freeze the hardware resources used in this example
 * @param huart: UART handle pointer
 * @retval None
-*/
-void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
+*/#nvoid HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 {
-  if(huart->Instance==USART2)
-  {
-  /* USER CODE BEGIN USART2_MspDeInit 0 */
+#tif(huart->Instance==USART2)
+#t{
+#t/* USER CODE BEGIN USART2_MspDeInit 0 */
+#n#t/* USER CODE END USART2_MspDeInit 0 */
+#t#t/* Peripheral clock disable */
+#t#t__HAL_RCC_USART2_CLK_DISABLE();
+#t
+#t#t/**USART2 GPIO Configuration#t#t
+#t#tPA2#t#t ------> USART2_TX
+#t#tPA3#t#t ------> USART2_RX #n#t#t*/
+#t#tHAL_GPIO_DeInit(GPIOA, USART_TX_Pin|USART_RX_Pin);
+#n
+#t/* USER CODE BEGIN USART2_MspDeInit 1 */
+#n#t/* USER CODE END USART2_MspDeInit 1 */
+#t}
+#n}#n#n
 
-  /* USER CODE END USART2_MspDeInit 0 */
-    /* Peripheral clock disable */
-    __HAL_RCC_USART2_CLK_DISABLE();
-  
-    /**USART2 GPIO Configuration    
-    PA2     ------> USART2_TX
-    PA3     ------> USART2_RX 
-    */
-    HAL_GPIO_DeInit(GPIOA, USART_TX_Pin|USART_RX_Pin);
 
-  /* USER CODE BEGIN USART2_MspDeInit 1 */
-
-  /* USER CODE END USART2_MspDeInit 1 */
-  }
-
-}
 
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
+
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
