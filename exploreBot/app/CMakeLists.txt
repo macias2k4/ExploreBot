@@ -1,4 +1,7 @@
+include_directories("../extern/dependencyInjection")
+
 add_executable(${CMAKE_PROJECT_NAME}.elf
+    App.cpp
     main.cpp
     stm32f4xx_hal_msp.c
     stm32f4xx_it.c
