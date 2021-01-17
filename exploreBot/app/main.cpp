@@ -23,6 +23,11 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "App.hpp"
+
+#include <boost/di/di.hpp>
+
+namespace di = boost::di;
 
 /* USER CODE END Includes */
 
@@ -95,12 +100,9 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-  }
+  const auto injector = di::make_injector();
+  auto app = injector.create<ExploreBot::App>();
+  app.exec();
   /* USER CODE END 3 */
 }
 
