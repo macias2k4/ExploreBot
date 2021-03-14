@@ -57,12 +57,12 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
-
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+bool turnOnLed{false};
 /* USER CODE END 0 */
 
 /**
@@ -100,9 +100,15 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  const auto injector = di::make_injector();
-  auto app = injector.create<ExploreBot::App>();
-  app.exec();
+//  const auto injector = di::make_injector();
+//  auto app = injector.create<ExploreBot::App>();
+//  app.exec();
+//  bool turnOnLedBefore = turnOnLed;
+  while(true){
+//      if(turnOnLedBefore != turnOnLed){
+//        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+//      }
+  }
   /* USER CODE END 3 */
 }
 
@@ -202,7 +208,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
@@ -213,10 +219,37 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : D2_Pin */
+  GPIO_InitStruct.Pin = D2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(D2_GPIO_Port, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if(GPIO_Pin == B1_Pin){
+        HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin));
+    }
+    if(GPIO_Pin == D2_Pin){
+        HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, HAL_GPIO_ReadPin(D2_GPIO_Port, D2_Pin));
+    }
+}
+//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+//{
+//    if(GPIO_Pin==D2_Pin){
+//        turnOnLed=!turnOnLed;
+//    }
+//    if(GPIO_Pin==B1_Pin){
+//        turnOnLed=!turnOnLed;
+//    }
+//}
 /* USER CODE END 4 */
 
 /**
