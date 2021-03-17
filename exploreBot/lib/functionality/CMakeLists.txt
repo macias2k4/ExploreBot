@@ -9,6 +9,11 @@ add_library(Functionality
     include/functionality/interruptsHandlerCaller/interface/IInterruptHandler.hpp
     include/functionality/interruptsHandlerCaller/InterruptsHandlerCaller.hpp
     src/interruptsHandlerCaller/InterruptsHandlerCaller.cpp
+    include/functionality/appModeChange/interface/IAppModeChanger.hpp
+    include/functionality/appModeChange/AppModeChanger.hpp
+    src/appModeChange/AppModeChanger.cpp
+    include/functionality/appModeChange/AppModeInterruptHandler.hpp
+    src/appModeChange/AppModeInterruptHandler.cpp
 )
 target_compile_features(Functionality PUBLIC cxx_std_17)
 target_include_directories(Functionality PUBLIC

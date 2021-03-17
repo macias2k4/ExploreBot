@@ -10,8 +10,10 @@ class InteruptsHandlerCaller
 public:
     explicit InteruptsHandlerCaller(IInterruptHandlerVector& interruptsHandler);
 
+    [[nodiscard]] bool callHandler(Common::GPIO::GPIOPin gpioPin) const noexcept;
+
 private:
-    IInterruptHandlerVector& interruptsHandler;
+    IInterruptHandlerVector& _interruptsHandler;
 };
 
 }
