@@ -9,4 +9,4 @@ add_executable(${CMAKE_PROJECT_NAME}.elf
 )
 
 #target_link_libraries(${CMAKE_PROJECT_NAME}.elf PRIVATE -Wl,--whole-archive stm -Wl,--no-whole-archive)# motorsController)
-target_link_libraries (${CMAKE_PROJECT_NAME}.elf -Wl,--whole-archive stm -Wl,--no-whole-archive)
+target_link_libraries (${CMAKE_PROJECT_NAME}.elf Functionality -Wl,--whole-archive stm -Wl,--no-whole-archive)

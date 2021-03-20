@@ -10,7 +10,9 @@ add_library(Functionality
     include/functionality/interruptsHandlerCaller/InterruptsHandlerCaller.hpp
     src/interruptsHandlerCaller/InterruptsHandlerCaller.cpp
     include/functionality/appModeChange/interface/IAppModeChanger.hpp
+    include/functionality/appModeChange/interface/IAppModeChangeObserver.hpp
     include/functionality/appModeChange/AppModeChanger.hpp
+    include/functionality/appMode/interface/IAppMode.hpp
     src/appModeChange/AppModeChanger.cpp
     include/functionality/appModeChange/AppModeInterruptHandler.hpp
     src/appModeChange/AppModeInterruptHandler.cpp

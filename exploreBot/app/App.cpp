@@ -5,18 +5,18 @@
 namespace ExploreBot {
 
 // ────────────────────────────────────────────────────────────────────────────────────────────── //
-App::App()
-{
-
-}
+App::App(Lib::Functionalities::AppMode::IAppMode& appMode)
+    : _appMode { appMode }
+{}
 
 // ────────────────────────────────────────────────────────────────────────────────────────────── //
 void App::exec() noexcept
 {
-    while(true){
-//        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-//        HAL_Delay(1500);
+    while (true) {
+        _appMode.exec();
     }
 }
 
-}
+void App::updateAppMode(Lib::Functionalities::AppMode::IAppMode& appMode) noexcept { _appMode = appMode; }
+
+}   // namespace ExploreBot
