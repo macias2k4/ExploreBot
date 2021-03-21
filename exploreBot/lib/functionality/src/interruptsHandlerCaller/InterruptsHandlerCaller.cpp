@@ -1,21 +1,19 @@
 #include "functionality/interruptsHandlerCaller/InterruptsHandlerCaller.hpp"
 
-namespace ExploreBot::Lib::Functionalities::InterruptsHandlerCaller {
+namespace ExploreBot::Lib::Functionalities::InterruptHandling {
 
-InteruptsHandlerCaller::InteruptsHandlerCaller(IInterruptHandlerVector &interruptsHandler)
+InterruptsHandlerCaller::InterruptsHandlerCaller(IInterruptHandlerVector& interruptsHandler)
     : _interruptsHandler { interruptsHandler }
-{
+{}
 
-}
-
-bool InteruptsHandlerCaller::callHandler(Common::GPIO::GPIOPin gpioPin) const noexcept
+bool InterruptsHandlerCaller::callHandler(Common::GPIO::GPIOPin gpioPin) noexcept
 {
-    for (const auto& handler : _interruptsHandler){
-        if (handler.triggeringPin()==gpioPin) {
+    for (auto& handler : _interruptsHandler) {
+        if (handler.triggeringPin() == gpioPin) {
             return handler.handle();
         }
     }
     return false;
 }
 
-}
+}   // namespace ExploreBot::Lib::Functionalities::InterruptHandling

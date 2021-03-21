@@ -5,18 +5,18 @@
 namespace ExploreBot {
 
 // ────────────────────────────────────────────────────────────────────────────────────────────── //
-App::App(Lib::Functionalities::AppMode::IAppMode& appMode)
-    : _appMode { appMode }
+App::App(Lib::Functionalities::AppMode::IAppMode& startAppMode)
+    : _currentAppMode { startAppMode }
 {}
 
 // ────────────────────────────────────────────────────────────────────────────────────────────── //
 void App::exec() noexcept
 {
     while (true) {
-        _appMode.exec();
+        _currentAppMode.executeStep();
     }
 }
 
-void App::updateAppMode(Lib::Functionalities::AppMode::IAppMode& appMode) noexcept { _appMode = appMode; }
+void App::updateAppMode(Lib::Functionalities::AppMode::IAppMode& appMode) noexcept { _currentAppMode = appMode; }
 
 }   // namespace ExploreBot

@@ -13,7 +13,7 @@ public:
     virtual ~IAppMode() = default;
 
     virtual std::string modeName() const noexcept = 0;
-    virtual void exec() noexcept = 0;
+    virtual void executeStep() noexcept = 0;
 };
 
 using AppModePtr = std::shared_ptr<IAppMode>;

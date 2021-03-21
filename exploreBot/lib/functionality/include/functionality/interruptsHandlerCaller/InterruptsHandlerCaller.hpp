@@ -3,19 +3,19 @@
 
 #include "functionality/interruptsHandlerCaller/interface/IInterruptHandler.hpp"
 
-namespace ExploreBot::Lib::Functionalities::InterruptsHandlerCaller {
+namespace ExploreBot::Lib::Functionalities::InterruptHandling {
 
-class InteruptsHandlerCaller
+class InterruptsHandlerCaller
 {
 public:
-    explicit InteruptsHandlerCaller(IInterruptHandlerVector& interruptsHandler);
+    explicit InterruptsHandlerCaller(IInterruptHandlerVector& interruptsHandler);
 
-    [[nodiscard]] bool callHandler(Common::GPIO::GPIOPin gpioPin) const noexcept;
+    [[nodiscard]] bool callHandler(Common::GPIO::GPIOPin gpioPin) noexcept;
 
 private:
     IInterruptHandlerVector& _interruptsHandler;
 };
 
-}
+}   // namespace ExploreBot::Lib::Functionalities::InterruptHandling
 
 #endif
