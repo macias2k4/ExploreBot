@@ -6,13 +6,17 @@ project(Functionality VERSION 0.0.1)
 
 #library definition
 add_library(Functionality
+    include/functionality/appMode/interface/IAppMode.hpp
+    include/functionality/appMode/ManualControlMode.hpp
+    src/appMode/ManualControlMode.cpp
+    include/functionality/appMode/AutomaticRideMode.hpp
+    src/appMode/AutomaticRideMode.cpp
     include/functionality/interruptsHandlerCaller/interface/IInterruptHandler.hpp
     include/functionality/interruptsHandlerCaller/InterruptsHandlerCaller.hpp
     src/interruptsHandlerCaller/InterruptsHandlerCaller.cpp
     include/functionality/appModeChange/interface/IAppModeChanger.hpp
     include/functionality/appModeChange/interface/IAppModeChangeObserver.hpp
     include/functionality/appModeChange/AppModeChanger.hpp
-    include/functionality/appMode/interface/IAppMode.hpp
     src/appModeChange/AppModeChanger.cpp
     include/functionality/appModeChange/AppModeInterruptHandler.hpp
     src/appModeChange/AppModeInterruptHandler.cpp
@@ -23,4 +27,4 @@ target_include_directories(Functionality PUBLIC
     $<INSTALL_INTERFACE:include>
 )
 
-target_link_libraries(Functionality Common)
+target_link_libraries(Functionality Common Peripherals)

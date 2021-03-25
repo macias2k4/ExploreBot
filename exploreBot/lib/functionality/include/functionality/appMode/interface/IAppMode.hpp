@@ -12,7 +12,7 @@ class IAppMode
 public:
     virtual ~IAppMode() = default;
 
-    virtual std::string modeName() const noexcept = 0;
+    [[nodiscard]] virtual std::string modeName() const noexcept = 0;
     virtual void executeStep() noexcept = 0;
 };
 
