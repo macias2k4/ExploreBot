@@ -3,6 +3,7 @@
 
 #include "common/gpio/GPIO.hpp"
 
+#include <memory>
 #include <vector>
 
 namespace ExploreBot::Lib::Functionalities::InterruptHandling {
@@ -16,7 +17,8 @@ public:
     [[nodiscard]] virtual bool handle() noexcept = 0;
 };
 
-using IInterruptHandlerVector = std::vector<IInterruptHandler>;
+using IInterruptHandlerPtr = std::shared_ptr<IInterruptHandler>;
+using IInterruptHandlerPtrVector = std::vector<IInterruptHandlerPtr>;
 
 }   // namespace ExploreBot::Lib::Functionalities::InterruptHandling
 

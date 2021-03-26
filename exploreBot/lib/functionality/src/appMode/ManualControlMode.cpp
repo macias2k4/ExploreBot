@@ -12,7 +12,7 @@ ManualControlMode::ManualControlMode(Peripherals::Led::IDebugLed& debugLed, Peri
 void ManualControlMode::executeStep() noexcept
 {
     _debugLed.turnOn();
-    _armMcu.delay(500);
+    _armMcu.delay(2000);
     _debugLed.turnOff();
     _armMcu.delay(2000);
 }

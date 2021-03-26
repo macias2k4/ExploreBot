@@ -5,18 +5,26 @@
 namespace ExploreBot {
 
 // ────────────────────────────────────────────────────────────────────────────────────────────── //
-App::App(Lib::Functionalities::AppMode::IAppMode& startAppMode)
-    : _currentAppMode { startAppMode }
+App::App(funct::AppModeChange::IAppModeChanger& appModeChanger,
+    funct::InterruptHandling::InterruptsHandlerCaller& interruptsHandlerCaller)
+    : _appModeChanger { appModeChanger }
+    , _interruptsHandlerCaller { interruptsHandlerCaller }
 {}
 
 // ────────────────────────────────────────────────────────────────────────────────────────────── //
 void App::exec() noexcept
 {
+    _appModeChanger.addObserver(*this);
+    if (!_appModeChanger.changeToStartingMode()) {
+        return;
+    }
     while (true) {
-        _currentAppMode.executeStep();
+        _currentAppMode->executeStep();
     }
 }
 
-void App::updateAppMode(Lib::Functionalities::AppMode::IAppMode& appMode) noexcept { _currentAppMode = appMode; }
+void App::updateAppMode(funct::AppMode::AppModePtr appMode) noexcept { _currentAppMode = appMode; }
+
+bool App::callHandler(Lib::Common::GPIO::GPIOPin gpioPin) noexcept { return _interruptsHandlerCaller.callHandler(gpioPin); }
 
 }   // namespace ExploreBot

@@ -11,14 +11,16 @@ class AppModeChanger final : public IAppModeChanger
 public:
     explicit AppModeChanger(AppMode::AppModePtrVector& appModes);
 
-    bool addObserver(AppModeChangeObserverPtr newObserver) noexcept override;
+    bool addObserver(IAppModeChangeObserver& newObserver) noexcept override;
+
+    [[nodiscard]] bool changeToStartingMode() noexcept override;
     [[nodiscard]] bool changeMode(std::string_view modeName) noexcept override;
 
 private:
     AppMode::AppModePtrVector& _appModes;
-    AppModeChangeObserverPtrVector _observers;
+    std::vector<std::reference_wrapper<IAppModeChangeObserver>> _observers;
 
-    void notifyAllObservers(AppMode::IAppMode& appMode) noexcept;
+    void notifyAllObservers(AppMode::AppModePtr appMode) noexcept;
 };
 
 }   // namespace ExploreBot::Lib::Functionalities::AppModeChange

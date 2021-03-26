@@ -8,12 +8,12 @@ namespace ExploreBot::Lib::Functionalities::InterruptHandling {
 class InterruptsHandlerCaller
 {
 public:
-    explicit InterruptsHandlerCaller(IInterruptHandlerVector& interruptsHandler);
+    explicit InterruptsHandlerCaller(IInterruptHandlerPtrVector& interruptsHandler);
 
     [[nodiscard]] bool callHandler(Common::GPIO::GPIOPin gpioPin) noexcept;
 
 private:
-    IInterruptHandlerVector& _interruptsHandler;
+    IInterruptHandlerPtrVector& _interruptsHandler;
 };
 
 }   // namespace ExploreBot::Lib::Functionalities::InterruptHandling

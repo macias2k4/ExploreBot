@@ -14,7 +14,7 @@ public:
     virtual ~IAppModeChangeObserver() = default;
 
     virtual std::string name() const noexcept = 0;
-    virtual void updateAppMode(AppMode::IAppMode& appMode) noexcept = 0;
+    virtual void updateAppMode(AppMode::AppModePtr appMode) noexcept = 0;
 };
 
 using AppModeChangeObserverPtr = std::shared_ptr<IAppModeChangeObserver>;

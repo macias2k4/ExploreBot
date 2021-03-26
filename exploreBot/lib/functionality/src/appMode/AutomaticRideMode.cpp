@@ -12,9 +12,9 @@ AutomaticRideMode::AutomaticRideMode(Peripherals::Led::IDebugLed& debugLed, Peri
 void AutomaticRideMode::executeStep() noexcept
 {
     _debugLed.turnOn();
-    _armMcu.delay(300);
+    _armMcu.delay(200);
     _debugLed.turnOff();
-    _armMcu.delay(500);
+    _armMcu.delay(200);
 }
 
 }   // namespace ExploreBot::Lib::Functionalities::AppMode
