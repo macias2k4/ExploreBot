@@ -35,6 +35,8 @@
 
 #include <boost/di/di.hpp>
 
+#include <memory>
+
 namespace di = boost::di;
 
 /* USER CODE END Includes */
@@ -70,10 +72,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-bool turnOnLed { false };
+std::shared_ptr<ExploreBot::App> app;
 /* USER CODE END 0 */
-
-ExploreBot::App* appPtr { nullptr };
 
 /**
  * @brief  The application entry point.
@@ -117,20 +117,10 @@ int main(void)
         di::bind<funct::AppMode::IAppMode*[]>().to<funct::AppMode::ManualControlMode, funct::AppMode::AutomaticRideMode>(),
         di::bind<funct::AppModeChange::IAppModeChanger>().to<funct::AppModeChange::AppModeChanger>(),
         di::bind<funct::InterruptHandling::IInterruptHandler*[]>().to<funct::AppModeChange::AppModeInterruptHandler>());
-    auto app = injector.create<ExploreBot::App>();
-    appPtr = &app;
+    app = std::make_shared<ExploreBot::App>(injector.create<ExploreBot::App>());
     while (true) {
-        app.exec();
+        app->exec();
     }
-    //  const auto injector = di::make_injector();
-    //  auto app = injector.create<ExploreBot::App>();
-    //  app.exec();
-    //  bool turnOnLedBefore = turnOnLed;
-    //  while(true){
-    //      if(turnOnLedBefore != turnOnLed){
-    //        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-    //      }
-    //  }
     /* USER CODE END 3 */
 }
 
@@ -249,11 +239,11 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-    if (!appPtr) {
+    if (!app) {
         return;
     }
 
-    auto isHandled = appPtr->callHandler(GPIO_Pin);
+    auto isHandled = app->callHandler(GPIO_Pin);
     if (isHandled) {
         // logger
     } else {
