@@ -237,7 +237,7 @@ static void MX_GPIO_Init(void)
 
     /*Configure GPIO pin : D2_Pin */
     GPIO_InitStruct.Pin = D2_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(D2_GPIO_Port, &GPIO_InitStruct);
 
@@ -249,23 +249,17 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-    appPtr->callHandler(GPIO_Pin);
-    //    if (GPIO_Pin == B1_Pin) {
-    //        HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin));
-    //    }
-    //    if (GPIO_Pin == D2_Pin) {
-    //        HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, HAL_GPIO_ReadPin(D2_GPIO_Port, D2_Pin));
-    //    }
+    if (!appPtr) {
+        return;
+    }
+
+    auto isHandled = appPtr->callHandler(GPIO_Pin);
+    if (isHandled) {
+        // logger
+    } else {
+        // logger
+    }
 }
-// void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-//{
-//    if(GPIO_Pin==D2_Pin){
-//        turnOnLed=!turnOnLed;
-//    }
-//    if(GPIO_Pin==B1_Pin){
-//        turnOnLed=!turnOnLed;
-//    }
-//}
 /* USER CODE END 4 */
 
 /**
