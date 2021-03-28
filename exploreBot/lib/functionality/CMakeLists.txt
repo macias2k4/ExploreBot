@@ -4,6 +4,8 @@ project(Functionality VERSION 0.0.1)
 #dependencies
 #find_package
 
+include_directories(../peripherals/include)
+
 #library definition
 add_library(Functionality
     include/functionality/appMode/interface/IAppMode.hpp
@@ -27,4 +29,4 @@ target_include_directories(Functionality PUBLIC
     $<INSTALL_INTERFACE:include>
 )
 
-target_link_libraries(Functionality Common Peripherals)
+target_link_libraries(Functionality Common)
