@@ -26,13 +26,15 @@ add_subdirectory(../exploreBot/lib/common exploreBotLib/common)
 include_directories(../exploreBot/lib/peripherals/include)
 add_subdirectory(../exploreBot/lib/functionality exploreBotLib/functionality)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 # target definition
 #add_subdirectory(mocks)
 #add_subdirectory(lib)
 #add_subdirectory(app)
 add_executable(${CMAKE_PROJECT_NAME}
     main.cpp
-#    lib/functionality/InterruptHandling/InterruptsHandlerCallerTest.cpp
+    mock/functionality/appModeChange/AppModeChangerMock.hpp
+    lib/functionality/InterruptHandling/InterruptsHandlerCallerTest.cpp
 )
 target_link_libraries(${CMAKE_PROJECT_NAME}
     PUBLIC
