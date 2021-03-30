@@ -12,6 +12,10 @@ AppModeInterruptHandler::AppModeInterruptHandler(IAppModeChanger& appModeChanger
 
 bool AppModeInterruptHandler::handle() noexcept
 {
+    if (_appModeNames.empty()) {
+        return false;
+    }
+
     _currentAppNameIndex++;
     if (_currentAppNameIndex >= _appModeNames.size()) {
         _currentAppNameIndex = 0;
