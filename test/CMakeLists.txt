@@ -33,6 +33,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 #add_subdirectory(app)
 add_executable(${CMAKE_PROJECT_NAME}
     main.cpp
+    mock/functionality/appMode/AppModeMock.hpp
     mock/functionality/appModeChange/AppModeChangerMock.hpp
     lib/functionality/InterruptHandling/InterruptsHandlerCallerTest.cpp
 )

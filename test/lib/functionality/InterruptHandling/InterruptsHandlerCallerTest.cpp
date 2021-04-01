@@ -2,10 +2,8 @@
 
 #include "functionality/interruptsHandlerCaller/InterruptsHandlerCaller.hpp"
 #include "functionality/appModeChange/AppModeInterruptHandler.hpp"
-#include "functionality/appMode/ManualControlMode.hpp"
 
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 
 using namespace ::testing;
 using namespace std;
@@ -23,7 +21,8 @@ TEST(InterruptsHandlerCallerTest, noHandlers_callHandler_noInterruptHandleCalled
     appFunct::InterruptHandling::IInterruptHandlerPtrVector handlers;
     appFunct::InterruptHandling::InterruptsHandlerCaller interruptsHandlerCaller { handlers };
 
-    ASSERT_EQ(false, interruptsHandlerCaller.callHandler(ExploreBot::Lib::Common::GPIO::userButtonD2));
+    const auto doesHandlerCalled = interruptsHandlerCaller.callHandler(ExploreBot::Lib::Common::GPIO::userButtonD2).has_value();
+    ASSERT_EQ(false, doesHandlerCalled);
 }
 
 TEST(InterruptsHandlerCallerTest, ledD13Interrupt_callHandler_notCalledAppModeChangeInterruptHandle)
@@ -34,10 +33,11 @@ TEST(InterruptsHandlerCallerTest, ledD13Interrupt_callHandler_notCalledAppModeCh
     appFunct::InterruptHandling::IInterruptHandlerPtrVector handlers { appModeInterruptHandler };
     appFunct::InterruptHandling::InterruptsHandlerCaller interruptsHandlerCaller { handlers };
 
-    ASSERT_EQ(false, interruptsHandlerCaller.callHandler(ExploreBot::Lib::Common::GPIO::userLedD13));
+    const auto doesHandlerCalled = interruptsHandlerCaller.callHandler(ExploreBot::Lib::Common::GPIO::userLedD13).has_value();
+    ASSERT_EQ(false, doesHandlerCalled);
 }
 
-TEST(InterruptsHandlerCallerTest, buttonD2InterruptAndNoAppModes_callHandler_calledAppModeChangeInterruptHandleWithFail)
+TEST(InterruptsHandlerCallerTest, userButtonD2Interrupt_callHandler_calledAppModeChangeInterruptHandle)
 {
     AppModeChange::AppModeChangerMock appModeChanger;
     appFunct::AppMode::AppModePtrVector appModes;
@@ -45,12 +45,8 @@ TEST(InterruptsHandlerCallerTest, buttonD2InterruptAndNoAppModes_callHandler_cal
     appFunct::InterruptHandling::IInterruptHandlerPtrVector handlers { appModeInterruptHandler };
     appFunct::InterruptHandling::InterruptsHandlerCaller interruptsHandlerCaller { handlers };
 
-    ASSERT_EQ(false, interruptsHandlerCaller.callHandler(ExploreBot::Lib::Common::GPIO::userButtonD2));
-}
-
-TEST(InterruptsHandlerCallerTest, buttonD2InterruptWithAppModes_callHandler_calledAppModeChangeInterruptHandleWithSucceed)
-{
-    ASSERT_EQ(false, true);
+    const auto doesHandlerCalled = interruptsHandlerCaller.callHandler(ExploreBot::Lib::Common::GPIO::userButtonD2).has_value();
+    ASSERT_EQ(true, doesHandlerCalled);
 }
 
 }   // namespace InterruptHandling

@@ -6,14 +6,14 @@ InterruptsHandlerCaller::InterruptsHandlerCaller(IInterruptHandlerPtrVector& int
     : _interruptsHandler { interruptsHandler }
 {}
 
-bool InterruptsHandlerCaller::callHandler(Common::GPIO::GPIOPin gpioPin) noexcept
+std::optional<bool> InterruptsHandlerCaller::callHandler(Common::GPIO::GPIOPin gpioPin) noexcept
 {
     for (auto& handler : _interruptsHandler) {
         if (handler->triggeringPin() == gpioPin) {
             return handler->handle();
         }
     }
-    return false;
+    return {};
 }
 
 }   // namespace ExploreBot::Lib::Functionalities::InterruptHandling
