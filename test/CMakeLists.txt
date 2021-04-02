@@ -36,6 +36,7 @@ add_executable(${CMAKE_PROJECT_NAME}
     mock/functionality/appMode/AppModeMock.hpp
     mock/functionality/appModeChange/AppModeChangerMock.hpp
     lib/functionality/InterruptHandling/InterruptsHandlerCallerTest.cpp
+    lib/functionality/appModeChange/AppModeInterruptHandlerTest.cpp
 )
 target_link_libraries(${CMAKE_PROJECT_NAME}
     PUBLIC
