@@ -13,7 +13,7 @@ class IAppModeChangeObserver
 public:
     virtual ~IAppModeChangeObserver() = default;
 
-    virtual std::string name() const noexcept = 0;
+    [[nodiscard]] virtual std::string name() const noexcept = 0;
     virtual void updateAppMode(AppMode::AppModePtr appMode) noexcept = 0;
 };
 

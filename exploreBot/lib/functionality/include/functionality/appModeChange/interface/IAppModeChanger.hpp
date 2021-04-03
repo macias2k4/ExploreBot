@@ -12,7 +12,7 @@ class IAppModeChanger
 public:
     virtual ~IAppModeChanger() = default;
 
-    virtual bool addObserver(IAppModeChangeObserver& observer) noexcept = 0;
+    [[nodiscard]] virtual bool addObserver(IAppModeChangeObserver& observer) noexcept = 0;
 
     [[nodiscard]] virtual bool changeToStartingMode() noexcept = 0;
     [[nodiscard]] virtual bool changeMode(std::string_view modeName) noexcept = 0;
