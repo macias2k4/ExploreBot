@@ -12,7 +12,7 @@ namespace appFunct = ExploreBot::Lib::Functionalities;
 class AppModeMock final : public appFunct::AppMode::IAppMode
 {
 public:
-    MOCK_METHOD(std::string, modeName, (), (const, noexcept));
+    MOCK_METHOD(std::string, modeName, (), (const, noexcept, override));
     MOCK_METHOD(void, executeStep, (), (noexcept, override));
 };
 

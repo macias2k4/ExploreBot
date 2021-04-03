@@ -20,7 +20,7 @@ public:
     virtual std::string name() const noexcept override { return "App"; }
     void updateAppMode(funct::AppMode::AppModePtr appMode) noexcept override;
 
-    [[nodiscard]] bool callHandler(Lib::Common::GPIO::GPIOPin gpioPin) noexcept;
+    [[nodiscard]] std::optional<bool> callHandler(Lib::Common::GPIO::GPIOPin gpioPin) noexcept;
 
 private:
     funct::AppModeChange::IAppModeChanger& _appModeChanger;

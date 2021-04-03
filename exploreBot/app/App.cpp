@@ -25,6 +25,9 @@ void App::exec() noexcept
 
 void App::updateAppMode(funct::AppMode::AppModePtr appMode) noexcept { _currentAppMode = appMode; }
 
-bool App::callHandler(Lib::Common::GPIO::GPIOPin gpioPin) noexcept { return _interruptsHandlerCaller.callHandler(gpioPin); }
+std::optional<bool> App::callHandler(Lib::Common::GPIO::GPIOPin gpioPin) noexcept
+{
+    return _interruptsHandlerCaller.callHandler(gpioPin);
+}
 
 }   // namespace ExploreBot
