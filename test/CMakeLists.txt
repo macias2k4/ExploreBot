@@ -1,30 +1,50 @@
 cmake_minimum_required(VERSION 3.15)
- 
 project(ExploreBotTest CXX)
 
 enable_testing()
 
-include(FetchContent)
+# dependencies
+if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+    message(STATUS "Downloading conan.cmake from https://github.com/memsharded/cmake-conan")
+    file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
+            "${CMAKE_BINARY_DIR}/conan.cmake")
+endif()
 
-# GTest
-FetchContent_Declare(
-  googletest
-  GIT_REPOSITORY https://github.com/google/googletest.git
-  GIT_TAG        release-1.8.0
-)
-FetchContent_MakeAvailable(googletest)
+include(${CMAKE_BINARY_DIR}/conan.cmake)
+conan_cmake_run(CONANFILE conanfile.txt
+                BASIC_SETUP CMAKE_TARGETS
+                BUILD missing)
 
-#add_subdirectory(include)
-#add_subdirectory(src)
+if(EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+    include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+    conan_basic_setup(TARGET)
+#    add_library(GTest::Main INTERFACE IMPORTED)
+#    target_link_libraries(GTest::Main INTERFACE CONAN_PKG::gtest)
+endif()
+
+add_subdirectory(../exploreBot/lib/common exploreBotLib/common)
+include_directories(../exploreBot/lib/peripherals/include)
+add_subdirectory(../exploreBot/lib/functionality exploreBotLib/functionality)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+# target definition
+#add_subdirectory(mocks)
+#add_subdirectory(lib)
+#add_subdirectory(app)
 add_executable(${CMAKE_PROJECT_NAME}
-    Test.cpp
+    main.cpp
+    mock/functionality/appMode/AppModeMock.hpp
+    mock/functionality/appModeChange/AppModeChangerMock.hpp
+    mock/functionality/appModeChange/AppModeChangeObserverMock.hpp
+    lib/functionality/InterruptHandling/InterruptsHandlerCallerTest.cpp
+    lib/functionality/appModeChange/AppModeInterruptHandlerTest.cpp
+    lib/functionality/appModeChange/AppModeChangerTest.cpp
 )
-
-target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC
-    gtest_main
+target_link_libraries(${CMAKE_PROJECT_NAME}
+    PUBLIC
+        ${CONAN_LIBS}
+        Functionality
 )
-
-add_test(
-    NAME ${CMAKE_PROJECT_NAME}
+add_test(NAME ${CMAKE_PROJECT_NAME}
     COMMAND ${CMAKE_PROJECT_NAME}
 )
