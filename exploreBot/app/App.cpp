@@ -2,13 +2,16 @@
 
 #include "stm32f4xx_hal.h"
 
+using namespace std;
+
 namespace ExploreBot {
 
 // ────────────────────────────────────────────────────────────────────────────────────────────── //
 App::App(funct::AppModeChange::IAppModeChanger& appModeChanger,
-    funct::InterruptHandling::InterruptsHandlerCaller& interruptsHandlerCaller)
+    funct::InterruptHandling::InterruptsHandlerCaller& interruptsHandlerCaller, Lib::Peripherals::Logger::ILogger& logger)
     : _appModeChanger { appModeChanger }
     , _interruptsHandlerCaller { interruptsHandlerCaller }
+    , _logger { logger }
 {}
 
 // ────────────────────────────────────────────────────────────────────────────────────────────── //
@@ -23,7 +26,11 @@ void App::exec() noexcept
     }
 }
 
-void App::updateAppMode(funct::AppMode::AppModePtr appMode) noexcept { _currentAppMode = appMode; }
+void App::updateAppMode(funct::AppMode::AppModePtr appMode) noexcept
+{
+    _currentAppMode = appMode;
+    _logger.info(string { "Changed AppMode to '" }.append(_currentAppMode->modeName()).append("'"));
+}
 
 std::optional<bool> App::callHandler(Lib::Common::GPIO::GPIOPin gpioPin) noexcept
 {

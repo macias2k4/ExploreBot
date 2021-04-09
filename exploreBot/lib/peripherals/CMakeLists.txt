@@ -9,6 +9,9 @@ add_library(Peripherals
     include/peripherals/led/interface/IDebugLed.hpp
     include/peripherals/led/DebugLed.hpp
     src/led/DebugLed.cpp
+    include/peripherals/logger/interface/ILogger.hpp
+    include/peripherals/logger/UARTLogger.hpp
+    src/logger/UARTLogger.cpp
 )
 
 target_compile_features(Peripherals PUBLIC cxx_std_17)

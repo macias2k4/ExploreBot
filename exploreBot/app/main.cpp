@@ -32,12 +32,16 @@
 
 #include "peripherals/led/DebugLed.hpp"
 #include "peripherals/armMcu/ArmMcu.hpp"
+#include "peripherals/logger/UARTLogger.hpp"
 
 #include <boost/di/di.hpp>
 
 #include <memory>
+#include <cstring>
 
 namespace di = boost::di;
+namespace periph = ExploreBot::Lib::Peripherals;
+namespace funct = ExploreBot::Lib::Functionalities;
 
 /* USER CODE END Includes */
 
@@ -59,7 +63,16 @@ namespace di = boost::di;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-
+static constexpr std::array<const char*, 8> hellosMsg {
+    "   HELLO! \r\n",
+    "    ___T_",
+    "   | - - |",
+    "   |__v__|",
+    "  .=[::+]=.",
+    "]=' [___] '=[",
+    "    /  |",
+    "   _\\  |_\r\n",
+};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -73,6 +86,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 std::shared_ptr<ExploreBot::App> app;
+std::shared_ptr<periph::Logger::ILogger> logger;
 /* USER CODE END 0 */
 
 /**
@@ -110,17 +124,18 @@ int main(void)
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
-    namespace periph = ExploreBot::Lib::Peripherals;
-    namespace funct = ExploreBot::Lib::Functionalities;
+    logger = std::make_shared<periph::Logger::UARTLogger>(huart2);
+
     const auto injector = di::make_injector(di::bind<periph::Led::IDebugLed>().to<periph::Led::DebugLed>(),
-        di::bind<periph::ArmMcu::IArmMcu>().to<periph::ArmMcu::ArmMcu>(),
+        di::bind<periph::ArmMcu::IArmMcu>().to<periph::ArmMcu::ArmMcu>(), di::bind<periph::Logger::ILogger>().to(*logger),
         di::bind<funct::AppMode::IAppMode*[]>().to<funct::AppMode::ManualControlMode, funct::AppMode::AutomaticRideMode>(),
         di::bind<funct::AppModeChange::IAppModeChanger>().to<funct::AppModeChange::AppModeChanger>(),
         di::bind<funct::InterruptHandling::IInterruptHandler*[]>().to<funct::AppModeChange::AppModeInterruptHandler>());
     app = std::make_shared<ExploreBot::App>(injector.create<ExploreBot::App>());
-    while (true) {
-        app->exec();
+    for (const auto h : hellosMsg) {
+        logger->info(h);
     }
+    app->exec();
     /* USER CODE END 3 */
 }
 
